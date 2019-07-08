@@ -35,7 +35,7 @@ func main() {
 		log.Fatalf("Failed to retrieve servlets: %v", err)
 	}
 
-	backupDate := time.Now().Format("2006.01.02")
+	backupDate := time.Now().Format("2006-01-02")
 	for _, s := range *servers {
 		backupName := fmt.Sprintf("%s_%s", s.Name, backupDate)
 		_, _, err := c.Scalet.Backup(s.CTID, backupName)
@@ -43,7 +43,7 @@ func main() {
 			log.Printf("Error creating backup of servlet '%s' named '%s': %v", s.Name, backupName, err)
 			continue
 		}
-		log.Printf("Backup '%s' of servlet '%s' successfully created", s.Name, backupName)
+		log.Printf("Backup '%s' of servlet '%s' successfully created", backupName, s.Name)
 	}
 	backups, _, err := c.Backup.List()
 	if err != nil {
